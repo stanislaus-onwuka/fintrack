@@ -12,15 +12,17 @@ import OutlineButton from "../shared/buttons/outline-button";
 
 const columns: ColumnDef<Transaction>[] = [
   {
+    id: "date",
     accessorKey: "date",
     header: "Date",
-    cell: (info) => new Date(info.getValue<string>()).toLocaleDateString(),
   },
   {
+    id: "remark",
     accessorKey: "remark",
     header: "Remark",
   },
   {
+    id: "amount",
     accessorKey: "amount",
     header: "Amount",
     cell: (info) => {
@@ -32,10 +34,12 @@ const columns: ColumnDef<Transaction>[] = [
     },
   },
   {
+    id: "currency",
     accessorKey: "currency",
     header: "Currency",
   },
   {
+    id: "type",
     accessorKey: "type",
     header: "Type",
     cell: (info) => {

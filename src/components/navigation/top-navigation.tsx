@@ -6,7 +6,7 @@ import Avatar from "../shared/avatar";
 import { useAppContext } from "@/context/AppContext";
 
 function TopNavigation() {
-  const { toggleSidebar } = useAppContext();
+  const { toggleSidebar, showTableSearch } = useAppContext();
 
   return (
     <div className="flex justify-between items-center py-4 px-[4%] fixed top-0 left-0 right-0 w-full z-10 bg-base-white shadow-md shadow-gray-200 lg:shadow-none md:px-12">
@@ -46,7 +46,7 @@ function TopNavigation() {
         />
       </div>
       <div className="flex gap-7 items-center">
-        <button className="hidden cursor-pointer md:block">
+        <button onClick={showTableSearch} className="hidden cursor-pointer md:block">
           <Image
             src="/assets/icons/search.svg"
             width={24}

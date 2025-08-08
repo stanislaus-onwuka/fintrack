@@ -11,17 +11,29 @@ import {
 
 interface AppContextType {
   showSidebar: boolean;
+  tableSearch: boolean;
   toggleSidebar: () => void;
+  showTableSearch: () => void;
+  hideTableSearch: () => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [showSidebar, setSidebar] = useState<boolean>(false);
+  const [tableSearch, setTableSearch] = useState<boolean>(false);
   const pathname = usePathname();
 
   const toggleSidebar = () => {
     setSidebar((prev) => !prev);
+  };
+
+  const showTableSearch = () => {
+    setTableSearch(true);
+  };
+
+  const hideTableSearch = () => {
+    setTableSearch(false);
   };
 
   useEffect(() => {
@@ -40,13 +52,36 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        hideTableSearch();
+      } else {
+        showTableSearch();
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     if (window.innerWidth < 1024) {
       setSidebar(false);
     }
   }, [pathname]);
 
   return (
-    <AppContext.Provider value={{ showSidebar, toggleSidebar }}>
+    <AppContext.Provider
+      value={{
+        showSidebar,
+        toggleSidebar,
+        tableSearch,
+        showTableSearch,
+        hideTableSearch,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
