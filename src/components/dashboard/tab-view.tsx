@@ -40,7 +40,7 @@ function DashboardTabView() {
           <p className="mb-6 text-dark-green max-w-md text-center">
             {error.message}
           </p>
-          <OutlineButton onClick={() => mutate()}>Try again</OutlineButton>
+          <OutlineButton className="py-2 px-[18px]" onClick={() => mutate()}>Try again</OutlineButton>
         </div>
       );
     }

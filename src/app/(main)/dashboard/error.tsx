@@ -1,6 +1,6 @@
 "use client";
 
-import PrimaryButton from "@/components/shared/buttons/primary-button";
+import OutlineButton from "@/components/shared/buttons/outline-button";
 import { useEffect } from "react";
 
 type ErrorProps = {
@@ -19,7 +19,7 @@ export default function Error({ error, reset }: ErrorProps) {
         Something went wrong 😬
       </h2>
       <p className="mb-6 text-dark-green max-w-md text-center">{error.message}</p>
-      <PrimaryButton onClick={reset}>Try again</PrimaryButton>
+      <OutlineButton className="py-2 px-[18px]" onClick={reset}>Try again</OutlineButton>
     </div>
   );
 }
