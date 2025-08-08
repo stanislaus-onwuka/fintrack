@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* *,
+body,
+html{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+} */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -8,19 +16,34 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-public-sans);
+
+  /* Custom colors */
+
+  /* Table */
+  --color-table-header: oklch(0.2599 0.0262 221.15 / 62%);
+  --color-table-border: oklch(0.2599 0.0262 221.15 / 20%);
+
+  /* Others */
+  --color-base-white: oklch(0.9933 0.0011 197.14);
+  --color-dark-green: oklch(0.2562 0.0152 218.04);
+  
+  --color-light-green: oklch(0.4662 0.0544 220.23 / 9%);
+  --color-light-green-100: oklch(0.5253 0.0617 219.64);
+  --color-light-green-200: oklch(0.4866 0.0566 220.76 / 16%);
+  --color-light-green-300: oklch(0.5024 0.0589 219.5);
+  --color-light-green-400: oklch(0.602 0.0722 220.46);
+
+  --color-success: oklch(0.5062 0.1453 147.55);
+  --color-error: oklch(0.5513 0.1834 33.17);
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body{
+  font-family: var(--font-public-sans);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom grid templates */
+.responsive-summary-grid{
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));;
 }

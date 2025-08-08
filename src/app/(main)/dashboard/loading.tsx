@@ -1,16 +1,7 @@
-"use client"
-
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import React from "react";
 
-export default function Home() {
-  const router = useRouter()
-
-  useEffect(() => {
-    router.replace('/dashboard')
-  }, [router])
-
+export default function Loading() {
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <Image
@@ -23,3 +14,4 @@ export default function Home() {
     </div>
   );
 }
+
