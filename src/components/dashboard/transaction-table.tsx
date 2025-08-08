@@ -1,12 +1,14 @@
-"use client"
+"use client";
 
 import { Transaction } from "@/types/transaction";
 import { ColumnDef } from "@tanstack/react-table";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Indicator from "../shared/indicator";
 import Table from "../shared/table";
-import { transactions } from "@/data/transactions";
 import Image from "next/image";
+import useSWR from "swr";
+import { fetcher } from "@/utils/functions";
+import OutlineButton from "../shared/buttons/outline-button";
 
 const columns: ColumnDef<Transaction>[] = [
   {
@@ -44,17 +46,12 @@ const columns: ColumnDef<Transaction>[] = [
 ];
 
 function TransactionTable() {
-  const [data, setData] = useState<Transaction[] | null>(null);
+  const { data, error, isLoading, mutate } = useSWR<Transaction[]>(
+    "/api/transactions/all",
+    fetcher
+  );
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setData(transactions);
-    }, 1000);
-
-    return () => clearTimeout(timeout);
-  }, []);
-
-  if (!data) {
+  if (isLoading) {
     return (
       <div className="w-full h-[500px] flex justify-center items-center">
         <Image
@@ -68,7 +65,21 @@ function TransactionTable() {
     );
   }
 
-  return <Table data={data} columns={columns} />;
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20">
+        <h2 className="text-2xl font-semibold text-error mb-4">
+          Something went wrong 😬
+        </h2>
+        <p className="mb-6 text-dark-green max-w-md text-center">
+          {error.message}
+        </p>
+        <OutlineButton onClick={() => mutate()}>Try again</OutlineButton>
+      </div>
+    );
+  }
+
+  if (data) return <Table data={data} columns={columns} />;
 }
 
 export default TransactionTable;

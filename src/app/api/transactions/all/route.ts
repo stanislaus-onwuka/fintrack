@@ -1,7 +1,6 @@
-import { Transaction } from "@/types/transaction"
+import { NextResponse } from "next/server";
 
-// Switched to using /api
-export const transactions: Transaction[] = [
+const transactions = [
   {
     id: "1",
     date: "2023-10-01",
@@ -75,3 +74,9 @@ export const transactions: Transaction[] = [
     type: "Debit"
   },
 ]
+
+
+export async function GET() {
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+  return NextResponse.json(transactions);
+}

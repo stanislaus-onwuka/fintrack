@@ -2,6 +2,7 @@ import { DashboardSummary } from "@/types/dashboard";
 import { Character } from "@/types/shared/avatar";
 import { Tab } from "@/types/shared/tabs";
 
+// Switched to using /api
 export const dashboardSampleData: DashboardSummary = {
     totalBalance: 12345,
     totalCredits: 7890,
